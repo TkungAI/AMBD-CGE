@@ -1,7 +1,6 @@
 % autoMBD示例脚本
 % 展示Data Dictionary的基本创建方法
 % 创建时间2023-02-04
-% 更新时间2023-02-24
 
 %% 清空数据
 clear; clc;
@@ -13,13 +12,13 @@ else
     ddObj = Simulink.data.dictionary.create('myDictionary.sldd');
 end
 
-%% 新建一个数据对象paramObjHandle（句柄），属Simulink.Parameter类
-paramObjHandle = Simulink.Parameter;
+%% 新建一个数据对象paramObj，属Simulink.Parameter类
+paramObj = Simulink.Parameter;
 % 设置属性参数
-paramObjHandle.Value = 1;
-paramObjHandle.DataType = 'uint16';
-paramObjHandle.Max = 10000;
-paramObjHandle.CoderInfo.StorageClass = 'ExportedGlobal';
+paramObj.Value = 1;
+paramObj.DataType = 'uint16';
+paramObj.Max = 10000;
+paramObj.CoderInfo.StorageClass = 'ExportedGlobal';
 
 %% 将创建的数据对象添加到数据字典中
 % 获取数据字典的'Design Data'区域
@@ -29,7 +28,7 @@ sectionObj = getSection(ddObj, 'Design Data');
 if (exist(sectionObj, 'paramObj'))
     paramObjEntry = getEntry(sectionObj, 'paramObj');
 else
-    paramObjEntry = addEntry(sectionObj, 'paramObj', paramObjHandle);
+    paramObjEntry = addEntry(sectionObj, 'paramObj', paramObj);
 end
 
 saveChanges(ddObj);
